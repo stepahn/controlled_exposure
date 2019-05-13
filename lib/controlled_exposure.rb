@@ -1,6 +1,7 @@
-require "controlled_exposure/version"
+# frozen_string_literal: true
+
+require 'controlled_exposure/version'
 
 module ControlledExposure
-  class Error < StandardError; end
-  # Your code goes here...
+  require 'controlled_exposure/railtie' if defined?(Rails)
 end

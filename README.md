@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/stepahn/controlled_exposure.svg?branch=master)](https://travis-ci.org/stepahn/controlled_exposure)
+
 # ControlledExposure
 
 explicit expose rails controller `@instance` variables as helpers in views. optional prevent all access to `@instance` variables in views.

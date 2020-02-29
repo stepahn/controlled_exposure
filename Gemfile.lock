@@ -63,7 +63,7 @@ GEM
       method_source
       rake (>= 0.8.7)
       thor (>= 0.19.0, < 2.0)
-    rake (10.5.0)
+    rake (13.0.1)
     simplecov (0.16.1)
       docile (~> 1.1)
       json (>= 1.8, < 3)
@@ -83,7 +83,7 @@ DEPENDENCIES
   minitest (~> 5.0)
   pry-byebug
   railties (>= 4.2.0)
-  rake (~> 10.0)
+  rake (~> 13.0)
   simplecov
 
 BUNDLED WITH

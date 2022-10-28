@@ -1,7 +1,3 @@
-[![Build Status](https://travis-ci.org/stepahn/controlled_exposure.svg?branch=master)](https://travis-ci.org/stepahn/controlled_exposure)
-[![Maintainability](https://api.codeclimate.com/v1/badges/acf90c4b4789749227c6/maintainability)](https://codeclimate.com/github/stepahn/controlled_exposure/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/acf90c4b4789749227c6/test_coverage)](https://codeclimate.com/github/stepahn/controlled_exposure/test_coverage)
-
 # ControlledExposure
 
 explicit expose rails controller `@instance` variables as helpers in views. optional prevent all access to `@instance` variables in views.

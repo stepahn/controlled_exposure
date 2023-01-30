@@ -39,7 +39,7 @@ GEM
       nokogiri (>= 1.5.9)
     method_source (1.0.0)
     mini_portile2 (2.8.1)
-    minitest (5.16.3)
+    minitest (5.17.0)
     nokogiri (1.14.0)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)

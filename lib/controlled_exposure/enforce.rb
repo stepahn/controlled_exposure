@@ -2,6 +2,8 @@
 
 module ControlledExposure
   module Enforce
+    extend ActiveSupport::Concern
+
     protected
 
     def view_assigns

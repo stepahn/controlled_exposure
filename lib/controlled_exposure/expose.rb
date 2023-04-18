@@ -2,11 +2,20 @@
 
 module ControlledExposure
   module Expose
+    extend ActiveSupport::Concern
+
     private
 
-    def enforce_expose!
-      include ControlledExposure::Enforce
-    end
+    class_methods do
+      def expose(attr)
+        attr_accessor attr
+        helper_method attr
+        protected attr
+      end
+
+      def enforce_expose!
+        include ControlledExposure::Enforce
+      end
 
     def expose(attr)
       attr_accessor attr

@@ -7,7 +7,7 @@ module ControlledExposure
   class Railtie < ::Rails::Railtie
     initializer 'controller_exposer.include_expose' do
       ActiveSupport.on_load :action_controller do
-        extend ControlledExposure::Expose
+        include ControlledExposure::Expose
       end
     end
   end

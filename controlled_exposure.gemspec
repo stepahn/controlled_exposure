@@ -34,12 +34,12 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
+  spec.add_runtime_dependency 'activesupport', '>= 4.2.0'
   spec.add_runtime_dependency 'railties', '>= 4.2.0'
-  spec.add_dependency 'activesupport', '~> 3.0'
 
   spec.add_development_dependency 'bundler', '~> 2.0'
   spec.add_development_dependency 'debug'
   spec.add_development_dependency 'minitest', '~> 5.0'
-  spec.add_development_dependency 'rake', '~> 10.0'
+  spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_development_dependency 'simplecov'
 end

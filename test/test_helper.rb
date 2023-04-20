@@ -7,6 +7,8 @@ SimpleCov.start do
   add_filter '/test/'
 end
 
+require 'debug'
+
 require 'minitest/autorun'
 
 require 'rails_helper'

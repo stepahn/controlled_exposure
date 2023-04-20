@@ -38,9 +38,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'activesupport', '~> 3.0'
 
   spec.add_development_dependency 'bundler', '~> 2.0'
+  spec.add_development_dependency 'debug'
   spec.add_development_dependency 'minitest', '~> 5.0'
-  spec.add_development_dependency 'pry-byebug'
-  spec.add_development_dependency 'railties', '>= 4.2.0'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'simplecov'
 end

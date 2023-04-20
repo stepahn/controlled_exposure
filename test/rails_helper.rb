@@ -19,7 +19,8 @@ module ControlledExposureTestApp
       get '/test_expose', to: 'controlled_exposure_test_app/enforce#test_expose'
       get '/test_expose_ivar', to: 'controlled_exposure_test_app/enforce#test_expose_ivar'
       get '/test_expose_ivar', to: 'controlled_exposure_test_app/enforce#test_expose_ivar'
-      get '/test_unenforced_expose', to: 'controlled_exposure_test_app/unenforced#test_expose'
+      get '/test_unenforced_attr_expose', to: 'controlled_exposure_test_app/unenforced#test_attr_expose'
+      get '/test_unenforced_ivar', to: 'controlled_exposure_test_app/unenforced#test_unenforced_ivar'
     end
   end
 end
@@ -74,12 +75,17 @@ module ControlledExposureTestApp
     end
   end
 
-  class UnenforcedController < ActionController::Base
-    expose :foo
+  class UnenforcedController < ApplicationController
+    attr_expose :foo
 
-    def test_expose
+    def test_attr_expose
       self.foo = params[:txt]
-      render inline: '<%= foo %>'
+      r '<%= foo %>'
+    end
+
+    def test_unenforced_ivar
+      @foo = params[:txt]
+      r '<%= @foo %>'
     end
   end
 end

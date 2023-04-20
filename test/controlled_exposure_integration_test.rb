@@ -29,7 +29,11 @@ class ControlledExposureIntegrationTest < ActionDispatch::IntegrationTest
     assert_response_body('/test_expose', 'TEST_STRING', text: 'TEST_STRING')
   end
 
-  def test_expose_ivar
-    assert_response_body('/test_expose_ivar', 'TEST_STRING', text: 'TEST_STRING')
+  def test_unenforced_attr_expose
+    assert_response_body('/test_unenforced_attr_expose', 'TEST_STRING', text: 'TEST_STRING')
+  end
+
+  def test_unenforced_ivar
+    assert_response_body('/test_unenforced_ivar', 'TEST_STRING', text: 'TEST_STRING')
   end
 end

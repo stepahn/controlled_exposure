@@ -69,7 +69,7 @@ end
 
 which is a shorthand for
 
-```
+```ruby
 class HelloController < ApplicationController
   def foobar
     "Hello World!"

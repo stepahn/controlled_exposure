@@ -2,6 +2,16 @@
 
 explicit expose rails controller `@instance` variables as helpers in views. optional prevent all access to `@instance` variables in views.
 
+
+## Changes
+
+### 2.0
+- add `attr_expose`
+- add `def_expose`
+- deprecate `expose`
+- this is now based on `ActiveSupport::Concern`
+
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -25,10 +35,11 @@ in your controller `app/controllers/hello_controller.rb`
 ```ruby
 class HelloController < ApplicationController
   enforce_expose!
-  expose :foo
+  attr_expose :foo, :bar
 
   def show
-    @foo = 'Hello World'
+    @foo = 'Hello'
+    self.bar = 'World!'
   end
 end
 ```
@@ -36,21 +47,46 @@ end
 and `app/views/hello/show.html.erb`
 
 ```ruby
-<%= foo %>
+<%= foo %><%= bar %>
 ```
 
 instead of
 
 ```ruby
-<%= @foo %>
+<%= @foo %><%= @bar %>
 ```
 
-### All Controllers
+
+There is also a `def_expose`
+
+```ruby
+class HelloController < ApplicationController
+  def_expose :foobar do
+    "Hello World!"
+  end
+end
+```
+
+which is a shorthand for
+
+```
+class HelloController < ApplicationController
+  def foobar
+    "Hello World!"
+  end
+
+  helper_method :foobar
+  protected_method :foobar
+end
+
+```
+
+### Enable for All Controllers
 
 ```ruby
 class ApplicationController < ActionController::Base
   enforce_expose!
-  expose :foo
+  attr_expose :foo
 end
 ```
 

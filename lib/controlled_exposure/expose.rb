@@ -16,6 +16,14 @@ module ControlledExposure
         include ControlledExposure::Enforce
       end
 
+      def def_expose(method, &block)
+        define_method(method, &block)
+
+        protected(method)
+
+        helper_method(method)
+      end
+
       def attr_expose(*args)
         args.each do |attr|
           attr_accessor(attr)

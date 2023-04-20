@@ -13,6 +13,10 @@ class ControlledExposureIntegrationTest < ActionDispatch::IntegrationTest
     assert_response_body('/test_attr_expose', 'TEST_BAR|TEST_BAZ', params: { bar: 'TEST_BAR', baz: 'TEST_BAZ' })
   end
 
+  def test_def_expose
+    assert_response_body('/test_def_expose', '|TEST_FOO|TEST_BAR|', params: { foo: 'TEST_FOO', bar: 'TEST_BAR' })
+  end
+
   def test_enforce
     assert_response_body('/test_enforce', '', text: 'TEST_STRING')
   end

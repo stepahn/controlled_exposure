@@ -36,7 +36,11 @@ module ControlledExposureTestApp
 
   class EnforceController < ApplicationController
     enforce_expose!
-    expose :foo
+
+    ActiveSupport::Deprecation.silence do
+      expose :foo
+    end
+
     attr_expose :bar, :baz
 
     def_expose :foobar do

@@ -12,12 +12,15 @@ module ControlledExposureTestApp
     config.logger = Logger.new(StringIO.new)
 
     routes.append do
+      get '/test_attr_expose', to: 'controlled_exposure_test_app/enforce#test_attr_expose'
+      get '/test_def_expose', to: 'controlled_exposure_test_app/enforce#test_def_expose'
       get '/test_enforce', to: 'controlled_exposure_test_app/enforce#test_enforce'
       get '/test_enforce_helper', to: 'controlled_exposure_test_app/enforce#test_enforce_helper'
       get '/test_expose', to: 'controlled_exposure_test_app/enforce#test_expose'
       get '/test_expose_ivar', to: 'controlled_exposure_test_app/enforce#test_expose_ivar'
       get '/test_expose_ivar', to: 'controlled_exposure_test_app/enforce#test_expose_ivar'
-      get '/test_unenforced_expose', to: 'controlled_exposure_test_app/unenforced#test_expose'
+      get '/test_unenforced_attr_expose', to: 'controlled_exposure_test_app/unenforced#test_attr_expose'
+      get '/test_unenforced_ivar', to: 'controlled_exposure_test_app/unenforced#test_unenforced_ivar'
     end
   end
 end
@@ -25,41 +28,68 @@ end
 ControlledExposureTestApp::Application.initialize!
 
 module ControlledExposureTestApp
-  class EnforceController < ActionController::Base
-    def render_helper
-      render inline: '<%= foo %>'
+  class ApplicationController < ActionController::Base
+    def r(template)
+      render inline: template
+    end
+  end
+
+  class EnforceController < ApplicationController
+    enforce_expose!
+
+    ActiveSupport::Deprecation.silence do
+      expose :foo
     end
 
-    enforce_expose!
-    expose :foo
+    attr_expose :bar, :baz
+
+    def_expose :foobar do
+      "|#{params[:foo]}|#{params[:bar]}|"
+    end
+
+    def test_attr_expose
+      self.bar = params[:bar]
+      self.baz = params[:baz]
+
+      r '<%= bar %>|<%= baz %>'
+    end
+
+    def test_def_expose
+      r '<%= foobar %>'
+    end
 
     def test_enforce
       @bar = params[:txt]
-      render inline: '<%= @bar %>'
+      r '<%= @bar %>'
     end
 
     def test_enforce_helper
       self.foo = params[:txt]
-      render inline: '<%= @foo %>'
+      r '<%= @foo %>'
     end
 
     def test_expose
       self.foo = params[:txt]
-      render_helper
+      r '<%= foo %>'
     end
 
     def test_expose_ivar
       @foo = params[:txt]
-      render_helper
+      r '<%= foo %>'
     end
   end
 
-  class UnenforcedController < ActionController::Base
-    expose :foo
+  class UnenforcedController < ApplicationController
+    attr_expose :foo
 
-    def test_expose
+    def test_attr_expose
       self.foo = params[:txt]
-      render inline: '<%= foo %>'
+      r '<%= foo %>'
+    end
+
+    def test_unenforced_ivar
+      @foo = params[:txt]
+      r '<%= @foo %>'
     end
   end
 end
